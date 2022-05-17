@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "api.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "realm": "^10.17.0",
+    "sqlite3": "^5.0.8"
+  },
+  "scripts": {
+    "start": "node api.js",
+    "dev": "nodemon api.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}
