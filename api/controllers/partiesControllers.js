@@ -9,7 +9,7 @@ const getAllParties = async (req,res) => {
     const db = await require('../db/database');
     db.write(()=>{
         let parties=db.objects("Parties");
-        res.json(parties);
+        res.status(200).json(parties);
     })
 }
 

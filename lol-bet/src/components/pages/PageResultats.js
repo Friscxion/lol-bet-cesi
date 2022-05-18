@@ -9,7 +9,7 @@ export default class PageResultats extends Component{
     render(){
         return(
             <div>
-                <Button>Résultats</Button>
+
             </div>
         )
     }
