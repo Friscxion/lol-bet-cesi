@@ -36,7 +36,7 @@ function App() {
           <Nav.Item onClick={()=>setPage("result")}>Résultats</Nav.Item>
         </Nav>
         <Nav pullRight>
-          <Nav.Item icon={<BiReset size={25} style={{marginRight:10}}/>}>Reset DATABASE</Nav.Item>
+          <Nav.Item onClick={()=>fetch("http://localhost:3002/reset").then(()=>window.location.reload())} icon={<BiReset size={25} style={{marginRight:10}}/>}>Reset DATABASE</Nav.Item>
         </Nav>
       </Navbar>
       {renderPage()}
