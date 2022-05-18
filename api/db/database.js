@@ -6,7 +6,7 @@ const Bets = {
         _id: "uuid",
         party_id: "string",
         ticket_id: "string",
-        pronostic: "string?",
+        pronostic: "int?",
         potential_gain:"float?",
         result:"string?"
     },
@@ -54,7 +54,8 @@ const Tickets = {
 async function db (){
     const realm = await Realm.open({
         schema: [Bets,Teams,Tickets,Parties],
-        path:"/db/loldb.realm"
+        path:"/db/loldb.realm",
+        schemaVersion:2
     });
     return realm;
 }
