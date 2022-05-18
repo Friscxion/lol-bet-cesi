@@ -1,5 +1,5 @@
 # League of Legends Bet CESI
-
+> Erwann CHAMPION
 ## Setup
 
 ### Yarn
