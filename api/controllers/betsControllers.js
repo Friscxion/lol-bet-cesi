@@ -14,13 +14,15 @@ const createBets = async (req,res) => {
         res.status(200).send({bet_id:bet._id});
     });
 }
+const getBetsByTicketId = async (req,res)=>{
+    let bets;
+    const db = await require('../db/database');
+    db.write(()=>{
+       bets=db.objects("Bets").filtered("ticket_id=$0",req.params.id);
 
-const updateBets = (req,res) => {
+    });
 
+    res.send(JSON.parse(JSON.stringify(bets)))
 }
 
-const deleteBets = (req,res) => {
-
-}
-
-module.exports = {index,createBets,updateBets,deleteBets}
+module.exports = {index,createBets,getBetsByTicketId}
