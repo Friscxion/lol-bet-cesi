@@ -7,10 +7,12 @@ const index = (req,res)=>{
 
 const createBets = async (req,res) => {
     const db = await require('../db/database');
-    const {party_id,ticket_id,pronostic}=req.body;
+    const {party_id,ticket_id,pronostic,potential_gain}=req.body;
+
     db.write(()=>{
-        db.create("Bets",{_id:new UUID(),party_id:party_id,ticket_id:ticket_id,pronostic:pronostic})
-    })
+        let bet=db.create("Bets",{_id:new UUID(),party_id:party_id,ticket_id:ticket_id,pronostic:pronostic,potential_gain:potential_gain})
+        res.status(200).send({bet_id:bet._id});
+    });
 }
 
 const updateBets = (req,res) => {

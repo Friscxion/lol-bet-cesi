@@ -29,16 +29,26 @@ export default class ModalParis extends Component{
     }
     handleSelected = (choix)=>this.setState({selected:choix});
 
-    colorize = (choix)=>choix===this.state.selected?{color:"green"}:null;
+    colorize = (choix)=>choix===this.state.selected?{color:"green"}:{};
 
-    handleSubmit = async ()=>{
-
-        this.handleClose();
+    handleSubmit =  ()=>{
+        fetch("http://localhost:3002/tickets",{
+            method:"PUT",
+            body:JSON.stringify({
+                party_id:this.state.partie._id,
+                pronostic:this.state.selected,
+                bet:this.state.mise
+            }),
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then(this.handleClose)
+            .catch(err => console.error(err));
     }
 
     render() {
         const {handleClose,handleSelected,handleSubmit,colorize}=this;
-        const {open,partie,home,away,mise}=this.state;
+        const {open,partie,home,away,mise,selected}=this.state;
         return(
             <div className="modal-container">
                 <Modal open={open} onClose={handleClose}>
@@ -74,9 +84,9 @@ export default class ModalParis extends Component{
                                     </div>
                                 </div>
                                 <div style={{justifyContent:"center",display:"flex",width:"100%"}}>
-                                    <Button className={"border"} appearance="subtle" {...colorize(CHOIX.HOMEWIN)} style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.HOMEWIN)}>{home.name+" WIN"}</Button>
-                                    <Button className={"border"} appearance="subtle" {...colorize(CHOIX.DRAW)} style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.DRAW)}>{"DRAW"}</Button>
-                                    <Button className={"border"} appearance="subtle" {...colorize(CHOIX.AWAYWIN)}style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.AWAYWIN)}>{away.name+" WIN"}</Button>
+                                    <Button className={"border"} active={selected===CHOIX.HOMEWIN} appearance="subtle" {...colorize(CHOIX.HOMEWIN)} style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.HOMEWIN)}>{home.name+" WIN"}</Button>
+                                    <Button className={"border"} active={selected===CHOIX.DRAW} appearance="subtle" {...colorize(CHOIX.DRAW)} style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.DRAW)}>{"DRAW"}</Button>
+                                    <Button className={"border"} active={selected===CHOIX.AWAYWIN} appearance="subtle" {...colorize(CHOIX.AWAYWIN)}style={{flex:2,margin:5}} onClick={handleSelected.bind(this,CHOIX.AWAYWIN)}>{away.name+" WIN"}</Button>
                                 </div>
                                 <div style={{display:"flex",width:"100%"}}>
                                     <div style={{width:"100%",display:"flex",flexDirection:"row",marginTop:20}}>
@@ -94,7 +104,7 @@ export default class ModalParis extends Component{
                             :null}
                     </Modal.Body>
                     <Modal.Footer style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-                        <Button onClick={handleSubmit} appearance="primary" color={"green"}>
+                        <Button disabled={!(selected&&mise)} onClick={handleSubmit} appearance="primary" color={"green"}>
                             Valider
                         </Button>
                         <Button onClick={handleClose} appearance="subtle">
