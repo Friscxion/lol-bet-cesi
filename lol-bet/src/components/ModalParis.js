@@ -37,7 +37,7 @@ export default class ModalParis extends Component{
                                 <span className={"equipe"}>
                                     {home.name}
                                 </span>
-                                            <span className={"equipe vs"}>
+                                <span className={"equipe vs"}>
                                     VS
                                 </span>
                                             <span className={"equipe"}>
