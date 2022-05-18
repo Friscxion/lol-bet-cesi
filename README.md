@@ -4,12 +4,16 @@
 
 ### Yarn
   
-  Lancer le back:
-  cd api
-  yarn
-  yarn dev
-  
-  Lancer le front:
-  cd lol-bet
-  yarn
-  yarn start
+  >Lancer le back:
+```
+cd api
+yarn
+yarn start
+```
+  >Lancer le front:
+
+```
+cd lol-bet
+yarn
+yarn start
+```
