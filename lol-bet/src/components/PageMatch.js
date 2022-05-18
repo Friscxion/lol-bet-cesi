@@ -62,10 +62,10 @@ export default class PageMatch extends Component{
     }
 
     render(){
-        let {parties,teams}=this.state;
+        let {parties}=this.state;
 
         return(
-            <div style={{margin: 50,minHeight:"80vh"}}bordered>
+            <div style={{margin: 50,minHeight:"80vh"}}>
                 <Divider style={{color:"white"}}>Matchs</Divider>
                 {parties.map(this.renderPartie)}
                 <ModalParis ref={this.refModal}/>
