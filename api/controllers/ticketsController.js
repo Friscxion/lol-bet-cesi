@@ -11,10 +11,17 @@ const index = (req,res)=>{
 
 const getAllTickets = async (req,res) => {
     const db = await require('../db/database');
+    let tickets
     db.write(()=>{
-        let tickets=db.objects("Tickets");
-        res.json(tickets);
-    })
+        tickets=db.objects("Tickets");
+    });
+    tickets=await Promise.all(tickets.map(async(ticket)=>{
+        ticket=JSON.parse(JSON.stringify(ticket));
+        let bets=await fetch("http://localhost:3002/bets/id/"+ticket._id);
+        bets=await bets.json();
+        return {...ticket,bets:bets}
+    }))
+    res.json(tickets);
 }
 
 const newTickets = async (req,res) => {
