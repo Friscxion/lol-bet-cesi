@@ -7,6 +7,7 @@ import {SiRiotgames} from "react-icons/si";
 import PageMatch from "./components/pages/PageMatch";
 import PageParis from "./components/pages/PageParis";
 import PageResultats from "./components/pages/PageResultats";
+import {BiReset} from "react-icons/bi";
 
 function App() {
   const [page,setPage] = useState("match");
@@ -33,6 +34,9 @@ function App() {
           <Nav.Item onClick={()=>setPage("match")}>Matchs</Nav.Item>
           <Nav.Item onClick={()=>setPage("paris")}>Mes paris</Nav.Item>
           <Nav.Item onClick={()=>setPage("result")}>Résultats</Nav.Item>
+        </Nav>
+        <Nav pullRight>
+          <Nav.Item icon={<BiReset size={25} style={{marginRight:10}}/>}>Reset DATABASE</Nav.Item>
         </Nav>
       </Navbar>
       {renderPage()}
