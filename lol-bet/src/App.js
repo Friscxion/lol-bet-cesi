@@ -4,9 +4,9 @@ import "rsuite/dist/rsuite.min.css";
 import {Nav, Navbar} from "rsuite";
 import {SiRiotgames} from "react-icons/si";
 
-import PageMatch from "./components/PageMatch";
-import PageParis from "./components/PageParis";
-import PageResultats from "./components/PageResultats";
+import PageMatch from "./components/pages/PageMatch";
+import PageParis from "./components/pages/PageParis";
+import PageResultats from "./components/pages/PageResultats";
 
 function App() {
   const [page,setPage] = useState("match");

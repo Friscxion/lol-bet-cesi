@@ -1,11 +1,6 @@
 import React, {Component} from "react";
 import {Button, Divider, Input, InputGroup, Modal} from "rsuite";
-
-const CHOIX ={
-    HOMEWIN:1,
-    AWAYWIN:2,
-    DRAW:3
-}
+import {CHOIX} from "../../utils/choix";
 
 
 export default class ModalParis extends Component{
@@ -21,17 +16,15 @@ export default class ModalParis extends Component{
         }
     }
 
-    handleOpen = (partie,home,away) => {
-        this.setState({open:true,partie:partie,home:home,away:away})
-    }
-    handleClose = () => {
-        this.setState({open:false})
-    }
-    handleSelected = (choix)=>this.setState({selected:choix});
+    handleOpen = (partie,home,away) => this.setState({open:true,partie:partie,home:home,away:away})
 
-    colorize = (choix)=>choix===this.state.selected?{color:"green"}:{};
+    handleClose = () => this.setState({open:false,selected:null,mise:""})
 
-    handleSubmit =  ()=>{
+    handleSelected = (choix) => this.setState({selected:choix});
+
+    colorize = (choix) => choix===this.state.selected?{color:"green"}:{};
+
+    handleSubmit =  () => {
         fetch("http://localhost:3002/tickets",{
             method:"PUT",
             body:JSON.stringify({

@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {Divider} from "rsuite";
-import ModalParis from "./ModalParis";
+import ModalParis from "../modals/ModalParis";
 
 export default class PageMatch extends Component{
     constructor(props){
