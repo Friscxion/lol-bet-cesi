@@ -21,20 +21,20 @@ const getAllTickets = async (req,res) => {
         bets=await bets.json();
         return {...ticket,bets:bets}
     }))
-    res.json(tickets);
+    res.status(200).json(tickets);
 }
 
 const newTickets = async (req,res) => {
     const db = await require('../db/database');
     let {party_id,bet,pronostic}=req.body;
+    if(!party_id||!bet||!pronostic)return res.sendStatus(404);
     bet=parseInt(bet);
     let potential_gain=await calculPotentialGain(party_id,pronostic,bet);
+    if(!potential_gain)return res.sendStatus(404);
     let ticket;
     db.write(()=>{
         ticket=db.create("Tickets",{_id:new UUID,date:Date.now()+"",bet:bet,potential_gain:potential_gain})
-        res.sendStatus(200);
     })
-
     await fetch("http://localhost:3002/bets",{
         method:"PUT",
         body:JSON.stringify({
@@ -47,6 +47,7 @@ const newTickets = async (req,res) => {
             "Content-Type":"application/json"
         }
     });
+    res.sendStatus(200);
 }
 
 const calculPotentialGain = async (party_id,pronostic,bet) => {
@@ -55,6 +56,7 @@ const calculPotentialGain = async (party_id,pronostic,bet) => {
     db.write(()=>{
         party=db.objectForPrimaryKey("Parties",new UUID(party_id));
     });
+    if(!party)return null;
     let ratio;
     if(pronostic===CHOIX.HOMEWIN)ratio=party.home_team_rating;
     else if(pronostic===CHOIX.AWAYWIN)ratio=party.away_team_rating;
