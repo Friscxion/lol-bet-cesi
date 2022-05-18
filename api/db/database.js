@@ -51,7 +51,6 @@ const Tickets = {
     primaryKey:"_id"
 };
 
-// open a local realm with the 'Cat' schema
 async function db (){
     const realm = await Realm.open({
         schema: [Bets,Teams,Tickets,Parties],

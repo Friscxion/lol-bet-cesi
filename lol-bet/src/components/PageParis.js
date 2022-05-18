@@ -4,6 +4,7 @@ import {Button} from "rsuite";
 export default class PageParis extends Component{
     constructor(props){
         super(props);
+        this.state={}
     }
     render(){
         return(
