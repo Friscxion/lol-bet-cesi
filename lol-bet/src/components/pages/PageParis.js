@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Divider} from "rsuite";
+import {Divider} from "rsuite";
 import ModalTicket from "../modals/ModalTicket";
 
 
